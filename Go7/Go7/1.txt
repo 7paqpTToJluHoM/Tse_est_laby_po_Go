@@ -1,0 +1,27 @@
+go run main.go
+cd D:\учеба\3 курс\Go7\Go7\task2
+go run main.go
+
+
+cd D:\учеба\3 курс\Go7\Go7\task3
+go run main.go
+меняем во втором задании 8080 на 8081
+
+
+cd D:\учеба\3 курс\Go7\Go7\task4
+go run main.go
+curl http://localhost:8082/hello
+curl -X POST http://localhost:8082/data -H "Content-Type: application/json" -d "{\"name\":\"Ivan\"}"
+
+
+cd D:\учеба\3 курс\Go7\Go7\task5
+go run main.go
+curl http://localhost:8083/hello
+curl http://localhost:8083/time
+
+
+
+cd D:\учеба\3 курс\Go7\Go7\task6
+go run main.go
+.\websocat.exe ws://localhost:8084/ws
+.\websocat.exe ws://localhost:8084/ws
