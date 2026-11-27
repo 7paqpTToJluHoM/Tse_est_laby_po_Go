@@ -1,0 +1,51 @@
+go run .
+
+Второе окно:
+curl.exe http://localhost:8082/users
+{"users":[],"page":1,"limit":10,"total":0}
+
+curl.exe -X POST http://localhost:8082/users -H "Content-Type: application/json" -d "{\"name\":\"Иван\",\"age\":20}"
+{"id":1,"name":"Иван","age":20}
+
+curl.exe http://localhost:8082/users/1
+{"id":1,"name":"Иван","age":20}
+
+curl.exe -X PUT http://localhost:8082/users/1 -H "Content-Type: application/json" -d "{\"name\":\"Пётр\",\"age\":25}"
+{"id":1,"name":"Пётр","age":25}
+
+curl.exe -X DELETE http://localhost:8082/users/1
+
+curl.exe "http://localhost:8082/users?min_age=18"
+
+curl.exe http://localhost:8082/users
+{"users":[],"page":1,"limit":10,"total":0}
+
+curl.exe -X POST http://localhost:8082/users -H "Content-Type: application/json" -d "{\"name\":\"\",\"age\":20}"
+{"error":"Имя не может быть пустым"}
+
+curl.exe -X POST http://localhost:8082/users -H "Content-Type: application/json" -d "{\"name\":\"Иван\",\"age\":20}"
+{"id":2,"name":"Иван","age":20}
+
+curl.exe -X POST http://localhost:8082/users -H "Content-Type: application/json" -d "{\"name\":\"Пётр\",\"age\":25}"
+{"id":3,"name":"Пётр","age":25}
+
+curl.exe "http://localhost:8082/users?page=1&limit=1"
+{"users":[{"id":2,"name":"Иван","age":20}],"page":1,"limit":1,"total":2}
+
+curl.exe "http://localhost:8082/users?name=Иван"
+{"users":[{"id":2,"name":"Иван","age":20}],"page":1,"limit":10,"total":1}
+
+curl.exe http://localhost:8082/users/999
+{"error":"Пользователь не найден"}
+
+curl.exe -X POST http://localhost:8082/users -H "Content-Type: application/json" -d "{\"name\":\"Иван\",\"age\":-5}"
+{"error":"Возраст должен быть от 1 до 100"}
+
+curl.exe -X POST http://localhost:8082/users -H "Content-Type: application/json" -d "{\"name\":\"Иван\",\"age\":200}"
+{"error":"Возраст должен быть от 1 до 100"}
+
+curl.exe "http://localhost:8082/users?page=0&limit=10"
+{"error":"Некорректный номер страницы"}
+
+curl.exe -X PATCH http://localhost:8082/users
+{"error":"Метод не поддерживается"}
